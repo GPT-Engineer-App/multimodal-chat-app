@@ -68,12 +68,15 @@ const Index = () => {
         body: formData,
       });
 
+      const responseBody = await response.text();
+      console.log("Full API response:", responseBody);
+
       if (!response.ok) {
-        throw new Error("Failed to upload video.");
+        throw new Error(`Failed to upload video. Status: ${response.status}, Response: ${responseBody}`);
       }
 
       if (response.headers.get("content-type")?.includes("application/json")) {
-        const result = await response.json();
+        const result = JSON.parse(responseBody);
         console.log(result);
 
         toast({
@@ -84,9 +87,10 @@ const Index = () => {
           isClosable: true,
         });
       } else {
-        throw new Error("Unexpected response format");
+        throw new Error(`Unexpected response format: ${responseBody}`);
       }
     } catch (error) {
+      console.error("Error:", error);
       toast({
         title: "Error",
         description: error.message,
