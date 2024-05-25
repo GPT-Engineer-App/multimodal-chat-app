@@ -63,7 +63,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append("file", videoBlob, "video.mp4");
 
-      const response = await fetch("YOUR_BACKEND_UPLOAD_ENDPOINT", {
+      const response = await fetch("https://your-backend-upload-endpoint.com/upload", {
         method: "POST",
         body: formData,
         headers: {
@@ -71,28 +71,21 @@ const Index = () => {
         },
       });
 
-      const responseBody = await response.text();
+      const result = await response.json();
       console.log("Response Headers:", response.headers);
-      console.log("Full API response:", responseBody);
+      console.log("Full API response:", result);
 
       if (!response.ok) {
-        throw new Error(`Failed to upload video. Status: ${response.status}, Response: ${responseBody}`);
+        throw new Error(`Failed to upload video. Status: ${response.status}, Response: ${JSON.stringify(result)}`);
       }
 
-      if (response.headers.get("content-type")?.includes("application/json")) {
-        const result = JSON.parse(responseBody);
-        console.log(result);
-
-        toast({
-          title: "Success",
-          description: "Video uploaded successfully.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-      } else {
-        throw new Error(`Unexpected response format: ${responseBody}`);
-      }
+      toast({
+        title: "Success",
+        description: "Video uploaded successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
       console.error("Error:", error);
       toast({
