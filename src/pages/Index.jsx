@@ -63,7 +63,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append("file", videoBlob, "video.mp4");
 
-      const response = await fetch("https://your-backend-upload-endpoint.com/upload", {
+      const response = await fetch("https://generativeai.googleapis.com/v1/models", {
         method: "POST",
         body: formData,
         headers: {
@@ -87,7 +87,8 @@ const Index = () => {
         isClosable: true,
       });
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error.message);
+      console.error("Full error:", error);
       toast({
         title: "Error",
         description: error.message,
