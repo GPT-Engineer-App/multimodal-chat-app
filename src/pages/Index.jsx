@@ -66,9 +66,13 @@ const Index = () => {
       const response = await fetch("YOUR_BACKEND_UPLOAD_ENDPOINT", {
         method: "POST",
         body: formData,
+        headers: {
+          Accept: "application/json",
+        },
       });
 
       const responseBody = await response.text();
+      console.log("Response Headers:", response.headers);
       console.log("Full API response:", responseBody);
 
       if (!response.ok) {
