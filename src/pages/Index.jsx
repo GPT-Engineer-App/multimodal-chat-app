@@ -72,20 +72,20 @@ const Index = () => {
         throw new Error("Failed to upload video.");
       }
 
-      const result = await response.json();
-      console.log(result);
+      if (response.headers.get("content-type")?.includes("application/json")) {
+        const result = await response.json();
+        console.log(result);
 
-      toast({
-        title: "Success",
-        description: "Video uploaded successfully.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-
-      // Handle AI response here
-      // Example: const aiResponse = await fetchAIResponse(result.fileUrl);
-      // console.log(aiResponse);
+        toast({
+          title: "Success",
+          description: "Video uploaded successfully.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        throw new Error("Unexpected response format");
+      }
     } catch (error) {
       toast({
         title: "Error",
