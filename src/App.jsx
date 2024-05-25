@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Index />} />
         <Route path="/ai-response" element={<AIResponse />} />
+        <Route path="/ai-model-response" element={<AIModelResponse />} />
       </Routes>
       <Navigation />
     </Router>
