@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Index from "./pages/Index.jsx";
 import AIResponse from "./pages/AIResponse.jsx";
+import AIModelResponse from "./pages/AIModelResponse.jsx";
 import Navigation from "./components/Navigation.jsx";
 
 function App() {

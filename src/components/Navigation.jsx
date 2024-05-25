@@ -12,6 +12,9 @@ function Navigation() {
         <Button as={Link} to="/ai-response" colorScheme="teal" variant="ghost">
           AI Response
         </Button>
+        <Button as={Link} to="/ai-model-response" colorScheme="teal" variant="ghost">
+          AI Model Response
+        </Button>
       </Flex>
     </Box>
   );
